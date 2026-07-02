@@ -16,17 +16,17 @@
   --ok:#1c9d54; --okbg:#e7f7ec; --warn:#c98a12; --warnbg:#fdf3da; --pen:#9a93ac; --penbg:#f0eef4;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;overflow:hidden;background:var(--cream);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--cream);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-weight:500;-webkit-font-smoothing:antialiased}
 button{font-family:inherit}
 img{display:block}
 #scene{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;z-index:0}
 
 /* ===== topbar (fixed, mobile-safe stacking) ===== */
 .topbar{position:fixed;top:0;left:0;right:0;z-index:6;display:flex;flex-direction:column;align-items:center;gap:9px;padding:calc(12px + env(safe-area-inset-top)) 12px 0;pointer-events:none}
-.top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;width:100%;max-width:560px;pointer-events:auto}
+.top{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;max-width:560px;pointer-events:auto}
 .top .kick{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
 .top .kick .wordmark{height:24px;width:auto;display:block;margin-bottom:2px}
-.top h1{margin:1px 0 0;font-size:21px;font-weight:800;letter-spacing:-.02em}
+.top .ttl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
 .counter{font-size:12px;font-weight:800;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 13px;white-space:nowrap;box-shadow:0 4px 14px rgba(43,35,80,.06)}
 .pswitch{display:flex;gap:5px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;width:100%;max-width:420px;pointer-events:auto;box-shadow:0 6px 18px rgba(43,35,80,.07)}
 .pswitch button{flex:1;border:0;background:transparent;color:var(--muted);font-weight:800;font-size:13px;padding:10px 8px;border-radius:999px;cursor:pointer;transition:.16s}
@@ -88,7 +88,7 @@ img{display:block}
 .pb-left{display:flex;flex-direction:column;gap:3px;min-width:0}
 .pb-l{font-size:12.5px;font-weight:700;color:var(--muted)}
 .pb-promo[hidden]{display:none}
-.pb-promo{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;background:#ffe2dd;color:#e11900;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;max-width:230px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pb-promo{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;background:#ffe1ee;color:#d6336c;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;max-width:230px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pb-right{display:flex;align-items:baseline;gap:8px}
 .pb-was{font-size:13px;font-weight:600;color:var(--muted);text-decoration:line-through}
 .pb-v{font-size:19px;font-weight:800}
@@ -167,13 +167,13 @@ img{display:block}
 .sgroup-h .tag{font-size:11px;font-weight:800;color:var(--muted)}
 .sline{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);margin-top:7px}
 .sline:first-of-type{border-top:0;margin-top:6px}
-.sthumb{width:40px;height:40px;border-radius:11px;overflow:hidden;flex:none;background:#f5f3fa;display:flex;align-items:center;justify-content:center;padding:3px}
+.sthumb{width:40px;height:40px;border-radius:11px;overflow:hidden;flex:none;background:#fff;display:flex;align-items:center;justify-content:center;padding:3px}
 .sthumb img{width:100%;height:100%;object-fit:contain}
 .sline .snm{flex:1;font-size:12.5px;font-weight:700;min-width:0}
 .sline .spr{font-size:12.5px;font-weight:800;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;line-height:1.2}
 .spr-was{font-size:10px;font-weight:600;color:var(--muted);text-decoration:line-through}
 .m-was{color:var(--muted);font-weight:600;text-decoration:line-through;font-size:14px}
-.m-off{display:inline-block;background:#ffe2dd;color:#e11900;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;vertical-align:middle}
+.m-price2 .m-off{display:inline-block;background:#ffe1ee;color:#d6336c;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;vertical-align:middle}
 .sx{flex:none;width:32px;height:32px;border-radius:999px;border:1px solid #f3c8c2;background:#fdecea;color:#c0392b;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;touch-action:manipulation;-webkit-tap-highlight-color:rgba(192,57,43,.2)}
 .sx:active{background:#fdecea}
 .sx svg,.stp button svg,.modal-x svg{pointer-events:none;display:block}
@@ -211,46 +211,102 @@ img{display:block}
 .dmsg{font-size:12px;line-height:1.55;border-radius:13px;padding:11px 13px;margin:10px 0 2px}
 .dmsg.warn{background:var(--warnbg);border:1px solid #f0e0a8;color:#8a6d1a}
 .dmsg.ok{background:var(--okbg);border:1px solid #bfe6cd;color:#1c7d46}
-.dlegend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
-.dlegend .lg{font-size:11px;font-weight:700;color:var(--muted)}
+.dlegend{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:10px}
+.dlegend .lg{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--muted)}
+.lg-ic{width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;line-height:1;flex:none;font-style:normal}
+.lg-ic.bisa{background:var(--okbg);color:var(--ok)}
+.lg-ic.konf{background:var(--warnbg);color:var(--warn)}
+.lg-ic.penuh{background:var(--penbg);color:var(--pen)}
 .mcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.mcard{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1.5px solid var(--line);background:#fff;border-radius:15px;padding:12px 4px;cursor:pointer;touch-action:manipulation}
-.mcard.dis{opacity:.4;cursor:not-allowed;filter:grayscale(.4)}
-.mcard .mc-na{font-size:9px;font-weight:800;color:var(--pen);margin-top:3px;line-height:1}
+.mcard{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1.5px solid var(--line);background:#fff;border-radius:15px;padding:12px 4px;cursor:pointer;touch-action:manipulation;min-height:112px}
+.mcard.dis{opacity:.45;cursor:not-allowed;filter:grayscale(.4)}
 .mcard .mc-e{font-size:22px;margin-bottom:5px;line-height:1}
 .mcard .mc-t{font-size:11px;font-weight:800;line-height:1.15;color:var(--ink);min-height:2.3em;display:flex;align-items:center;justify-content:center}
+.mcard .mc-s{font-size:10px;font-weight:800;color:var(--muted);margin-top:3px;line-height:1.1;min-height:13px}
+.mcard .mc-s.na{color:var(--pen)}
 .mcard.on{border-color:var(--purple);background:#f3f0ff}
-.mhelp{background:#f3f0ff;color:#4a3aad;font-size:11.5px;line-height:1.55;border-radius:13px;padding:11px 13px;margin-top:10px}
+.mcard.on .mc-s{color:var(--purple)}
+.mhelp{background:#f3f0ff;color:#4a3aad;font-size:11.5px;line-height:1.55;border-radius:13px;padding:11px 13px;margin-top:10px;font-weight:600;text-align:center}
 .mhelp.warn{background:var(--warnbg);color:#8a6d1a}
+.mpay{margin:4px 0 12px;background:#f3f0ff;color:#4a3aad;font-size:11.5px;font-weight:700;text-align:center;border-radius:13px;padding:10px 12px}
 .ck-area{width:100%;border:1px solid var(--line);background:var(--card);border-radius:13px;padding:11px 13px;font-family:inherit;font-size:13.5px;color:var(--ink);resize:none;outline:none}
 .ck-area:focus{border-color:var(--purple)}
+.ck-fee{display:flex;align-items:center;justify-content:space-between;margin:14px 0 -2px;font-size:13px;font-weight:700;color:var(--muted)}
+.ck-fee .cf-amt{color:var(--ink);font-weight:800}
 .ck-total{display:flex;align-items:center;justify-content:space-between;margin:18px 0 4px;font-size:14px;font-weight:700;color:var(--muted)}
 .ck-total b{font-size:23px;font-weight:800;color:var(--ink)}
 .ck-note{font-size:11.5px;color:var(--muted);line-height:1.5;margin:2px 0 14px}
 .ck-save[hidden]{display:none}
 .ck-save{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-2px 0 12px;font-size:12.5px}
 .ck-save .cs-was{color:var(--muted);text-decoration:line-through;font-weight:600}
-.ck-save .cs-tag{background:#ffe2dd;color:#e11900;font-weight:800;padding:2px 9px;border-radius:999px;font-size:11px}
-.ck-save .cs-amt{color:#e11900;font-weight:800;margin-left:auto}
+.ck-save .cs-tag{background:#ffe1ee;color:#d6336c;font-weight:800;padding:2px 9px;border-radius:999px;font-size:11px}
+.ck-save .cs-amt{color:#d6336c;font-weight:800;margin-left:auto}
 .ck-wa{width:100%;border:0;border-radius:15px;padding:15px;font-size:15px;font-weight:800;color:#fff;background:#25b34b;cursor:pointer;box-shadow:0 8px 22px rgba(37,179,75,.3)}
 .ck-wa:disabled{background:#cfc9dd;box-shadow:none;cursor:not-allowed}
 .ck-back{width:100%;border:1px solid var(--line);border-radius:15px;padding:14px;font-size:14px;font-weight:800;color:var(--ink);background:#fff;cursor:pointer;margin-top:10px}
 .ck-back:active{background:#f3f0fa}
 
 .toast{position:fixed;left:50%;bottom:120px;transform:translateX(-50%) translateY(20px);z-index:60;background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:11px 18px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;max-width:94vw;white-space:nowrap;text-align:center}
+.cal-pop[hidden]{display:none}
+.cal-pop{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(33,26,64,.45);opacity:0;transition:.18s}
+.cal-pop.show{opacity:1}
+.cal-card{background:#fff;border-radius:22px;padding:16px;width:min(380px,100%);max-height:88dvh;overflow:auto;box-shadow:0 20px 60px rgba(33,26,64,.3);transform:translateY(10px);transition:.2s}
+.cal-pop.show .cal-card{transform:translateY(0)}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-h b{font-size:15px;font-weight:800;color:var(--ink)}
+.cal-nav{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:18px;color:var(--ink);cursor:pointer;padding:0}
+.cal-nav:disabled{opacity:.35;cursor:default}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px}
+.cal-dow span{text-align:center;font-size:10px;font-weight:800;color:var(--muted)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-cell{aspect-ratio:1/1;border:1px solid var(--line);border-radius:11px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;padding:0;font:inherit}
+.cal-cell.empty{border:0;background:transparent;cursor:default}
+.cal-cell .cd-n{font-size:13px;font-weight:800;color:var(--ink)}
+.cal-cell.bisa{background:var(--okbg);border-color:#b6e6c6}
+.cal-cell.konfirmasi{background:var(--warnbg);border-color:#f0e0b0}
+.cal-cell.penuh{background:var(--penbg);border-color:#f3c8c2;opacity:.55}
+.cal-cell.lewat{opacity:.32}
+.cal-cell.on{outline:2.5px solid var(--purple);outline-offset:-2px}
+.cal-cell[disabled]{cursor:not-allowed}
+.ci{font-size:9px;font-weight:900;line-height:1;display:flex;align-items:center;justify-content:center;font-style:normal}
+.ci.bisa{color:var(--ok)}.ci.konf{color:var(--warn)}.ci.penuh{color:var(--pen)}.ci.gone{color:#cfc8dc}
+.cal-lg{display:flex;flex-wrap:wrap;gap:10px 14px;margin:13px 2px 0;font-size:11.5px;font-weight:700;color:var(--muted)}
+.cal-lg span{display:inline-flex;align-items:center;gap:5px}
+.cal-close{width:100%;margin-top:14px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px;font-size:14px;font-weight:800;color:var(--ink);cursor:pointer}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #logoTpl[hidden]{display:none}
+
+/* ===== v2 UX additions ===== */
+.promo-ribbon[hidden]{display:none}
+.promo-ribbon{pointer-events:auto;display:inline-flex;align-items:center;gap:6px;background:#ffe1ee;color:#d6336c;border:1px solid #ffc4dd;font-size:11.5px;font-weight:800;padding:6px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(214,51,108,.12);max-width:94vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.counter{position:relative;overflow:hidden;padding:0}
+.counter .cbar{position:absolute;left:0;top:0;bottom:0;width:0%;background:#efeaff;transition:width .3s ease;border-radius:999px}
+.counter.full .cbar{background:#dff5e6}
+.counter .ctxt{position:relative;display:block;padding:8px 13px}
+.fl .fprice{font-size:10px;font-weight:800;color:var(--purple);line-height:1}
+.fl .fprice s{color:var(--muted);font-weight:600;margin-right:3px}
+.dot.inbox{border-color:var(--purple);box-shadow:0 0 0 2px rgba(90,72,207,.16)}
+.dcard .dwas{font-size:11px;color:var(--muted);font-weight:600;margin-right:4px}
+.scene-actions button{width:auto;height:40px;border-radius:999px;padding:0 13px;gap:6px;font-weight:800;font-size:11.5px}
+.scene-actions button svg{width:15px;height:15px}
+.hint.done{background:#efeaff;color:var(--purple);border-color:#d9d2f5}
+.hint b{color:var(--purple)}
+.toast{display:flex;align-items:center;justify-content:center;gap:10px}
+.toast.show{pointer-events:auto}
+.toast .t-act{border:0;background:rgba(255,255,255,.18);color:#fff;font-weight:800;font-size:12px;padding:6px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.toast .t-act:active{background:rgba(255,255,255,.3)}
+.ck-trust{display:flex;flex-wrap:wrap;gap:5px 12px;font-size:11px;font-weight:700;color:var(--muted);margin:9px 0 2px}
 </style>
 </head>
 <body>
 <script id="mm3d-embed">window.MM3D_EMBED={"discount":{"on":true,"type":"percent","value":20,"label":"Soft Opening","scope":"all"}};</script>
-<script id="mm3d-defaults" type="application/json">{"mochi": [{"id": "straw", "name": "Mochi Strawberry Madness", "short": "Strawberry Madness", "subtitle": "cheesecake creamy + stroberi purée", "price": 15000, "badge": "Terlaris", "rating": 4.9, "sold": "240+ porsi terjual", "desc": "Kulit mochi stroberi yang lembut dan kenyal, dibalut isian cheesecake creamy yang gurih. Di tengahnya ada selai stroberi asli yang juicy, jadi tiap gigitan terasa manis-asam yang segar dan seimbang. Cocok buat yang suka rasa fruity tapi tetap creamy.", "color": "#ec86a8", "top": "#f6b8cd"}, {"id": "grape", "name": "Mochi Berry Velvet Cheese", "short": "Berry Velvet Cheese", "subtitle": "cheesecake + blueberry purée", "price": 15000, "badge": "Baru", "rating": 4.8, "sold": "Menu baru", "desc": "Kulit mochi blueberry lembut dan kenyal dengan isian cheesecake creamy yang gurih. Di tengahnya selai blueberry asli yang kaya, bikin tiap gigitan terasa manis-asam khas berry dengan tekstur velvety.", "color": "#8b76c6", "top": "#b3a4e0"}, {"id": "choco", "name": "Mochi Classic Choco", "short": "Classic Choco", "subtitle": "cream cokelat velvety", "price": 12500, "badge": "Terlaris", "rating": 4.9, "sold": "300+ porsi terjual", "desc": "Mochi cokelat lembut dan kenyal dengan isian cream kakao yang velvety. Dibuat dari cokelat premium, jadi rasanya intens tapi tetap smooth. Pilihan paling aman buat pencinta cokelat.", "color": "#7e5b45", "top": "#a07a60"}, {"id": "matcha", "name": "Mochi Matcha ChaCha", "short": "Matcha ChaCha", "subtitle": "cream matcha milky", "price": 12500, "badge": "Baru", "rating": 4.8, "sold": "180+ porsi terjual", "desc": "Mochi matcha lembut dan kenyal dengan cream matcha milky di dalamnya. Rasa matcha-nya earthy tapi seimbang sama manis susu, jadi nggak pahit berlebihan. Pas buat yang suka matcha autentik.", "color": "#97bb79", "top": "#bbd3a2"}, {"id": "cookie", "name": "Mochi Cheesy Cookies", "short": "Cheesy Cookies", "subtitle": "cheesecake + remahan oreo", "price": 15000, "badge": "Terlaris", "rating": 4.9, "sold": "260+ porsi terjual", "desc": "Mochi vanilla lembut dan kenyal dengan isian cream keju yang rich, dicampur potongan oreo yang crunchy. Perpaduan creamy dan renyah yang bikin nagih di tiap gigitan.", "color": "#e7d3a6", "top": "#f3e6c6"}, {"id": "mango", "name": "Mochi Kunafa? Gafafa OG", "short": "Kunafa OG", "subtitle": "pistachio kunafa + kataifi", "price": 25000, "badge": "Baru", "rating": 4.9, "sold": "Viral menu", "desc": "Mochi cokelat lembut dan kenyal dengan isian pistachio kunafa yang creamy dan kaya. Perpaduan cokelat dengan kataifi renyah di tiap gigitan, rasa Dubai-style yang lagi hype.", "color": "#e6b24f", "top": "#f1ce83"}, {"id": "kunafa2", "name": "Mochi Kunafa? Gafafa V2", "short": "Kunafa V2", "subtitle": "cheesecake + pistachio, lapis cokelat", "price": 25000, "badge": "", "rating": 4.8, "sold": "Edisi spesial", "desc": "Mochi cokelat berlapis cokelat, lembut dan kenyal, dengan isian cheesecake creamy plus pistachio kunafa. Ada kataifi renyah di dalamnya, jadi tekstur dan rasanya makin kompleks.", "color": "#d79b36", "top": "#e9be70"}], "dubai": [{"id": "dcc_s", "name": "Dubai Chewy Cookie Small", "short": "Small", "subtitle": "pistachio kunafa + kataifi", "price": 25000, "badge": "Baru", "rating": 4.9, "sold": "Menu baru", "desc": "Cookie cokelat kenyal dan kaya dengan isian pistachio kunafa yang renyah. Perpaduan nutty, buttery, dan cokelat di tiap gigitan. Ukuran small, pas buat dicoba.", "color": "#6b4a33", "top": "#8a6348"}, {"id": "dcc_b", "name": "Dubai Chewy Cookie Big", "short": "Big", "subtitle": "pistachio kunafa + kataifi", "price": 35000, "badge": "Terlaris", "rating": 4.9, "sold": "Best seller", "desc": "Cookie kenyal ala Dubai isi pistachio kunafa dan kataifi renyah, dilapisi cokelat. Manis, gurih, dan crunchy sekaligus. Ukuran big buat yang mau puas.", "color": "#5a3d29", "top": "#7a5238"}]}</script>
+<script id="mm3d-defaults" type="application/json">{"mochi": [{"id": "straw", "name": "Mochi Strawberry Madness", "short": "Strawberry Madness", "subtitle": "cheesecake creamy + stroberi purée", "price": 15000, "badge": "Terlaris", "rating": 4.9, "sold": "240+ porsi terjual", "desc": "Kulit mochi stroberi yang lembut dan kenyal, dibalut isian cheesecake creamy yang gurih. Di tengahnya ada selai stroberi asli yang juicy, jadi tiap gigitan terasa manis-asam yang segar dan seimbang. Cocok buat yang suka rasa fruity tapi tetap creamy.", "color": "#ec86a8", "top": "#f6b8cd"}, {"id": "grape", "name": "Mochi Berry Velvet Cheese", "short": "Berry Velvet Cheese", "subtitle": "cheesecake + blueberry purée", "price": 15000, "badge": "Baru", "rating": 4.8, "sold": "Menu baru", "desc": "Kulit mochi blueberry lembut dan kenyal dengan isian cheesecake creamy yang gurih. Di tengahnya selai blueberry asli yang kaya, bikin tiap gigitan terasa manis-asam khas berry dengan tekstur velvety.", "color": "#8b76c6", "top": "#b3a4e0"}, {"id": "choco", "name": "Mochi Classic Choco", "short": "Classic Choco", "subtitle": "cream cokelat velvety", "price": 12500, "badge": "Terlaris", "rating": 4.9, "sold": "300+ porsi terjual", "desc": "Mochi cokelat lembut dan kenyal dengan isian cream kakao yang velvety. Dibuat dari cokelat premium, jadi rasanya intens tapi tetap smooth. Pilihan paling aman buat pencinta cokelat.", "color": "#7e5b45", "top": "#a07a60"}, {"id": "matcha", "name": "Mochi Matcha ChaCha", "short": "Matcha ChaCha", "subtitle": "cream matcha milky", "price": 12500, "badge": "Baru", "rating": 4.8, "sold": "180+ porsi terjual", "desc": "Mochi matcha lembut dan kenyal dengan cream matcha milky di dalamnya. Rasa matcha-nya earthy tapi seimbang sama manis susu, jadi nggak pahit berlebihan. Pas buat yang suka matcha autentik.", "color": "#97bb79", "top": "#bbd3a2"}, {"id": "cookie", "name": "Mochi Cheesy Cookies", "short": "Cheesy Cookies", "subtitle": "cheesecake + remahan oreo", "price": 15000, "badge": "Terlaris", "rating": 4.9, "sold": "260+ porsi terjual", "desc": "Mochi vanilla lembut dan kenyal dengan isian cream keju yang rich, dicampur potongan oreo yang crunchy. Perpaduan creamy dan renyah yang bikin nagih di tiap gigitan.", "color": "#e7d3a6", "top": "#f3e6c6"}, {"id": "mango", "name": "Mochi Kunafa? Gafafa OG", "short": "Kunafa OG", "subtitle": "pistachio kunafa + kataifi", "price": 25000, "badge": "Terlaris", "rating": 4.9, "sold": "Viral menu", "desc": "Mochi cokelat lembut dan kenyal dengan isian pistachio kunafa yang creamy dan kaya. Perpaduan cokelat dengan kataifi renyah di tiap gigitan, rasa Dubai-style yang lagi hype.", "color": "#e6b24f", "top": "#f1ce83"}, {"id": "kunafa2", "name": "Mochi Kunafa? Gafafa V2", "short": "Kunafa V2", "subtitle": "cheesecake + pistachio, lapis cokelat", "price": 25000, "badge": "Baru", "rating": 4.8, "sold": "Edisi spesial", "desc": "Mochi cokelat berlapis cokelat, lembut dan kenyal, dengan isian cheesecake creamy plus pistachio kunafa. Ada kataifi renyah di dalamnya, jadi tekstur dan rasanya makin kompleks.", "color": "#d79b36", "top": "#e9be70"}], "dubai": [{"id": "dcc_s", "name": "Dubai Chewy Cookie Small", "short": "Small", "subtitle": "pistachio kunafa + kataifi", "price": 25000, "badge": "Terlaris", "rating": 4.9, "sold": "Menu baru", "desc": "Cookie cokelat kenyal dan kaya dengan isian pistachio kunafa yang renyah. Perpaduan nutty, buttery, dan cokelat di tiap gigitan. Ukuran small, pas buat dicoba.", "color": "#6b4a33", "top": "#8a6348"}, {"id": "dcc_b", "name": "Dubai Chewy Cookie Big", "short": "Big", "subtitle": "pistachio kunafa + kataifi", "price": 35000, "badge": "Baru", "rating": 4.9, "sold": "Best seller", "desc": "Cookie kenyal ala Dubai isi pistachio kunafa dan kataifi renyah, dilapisi cokelat. Manis, gurih, dan crunchy sekaligus. Ukuran big buat yang mau puas.", "color": "#5a3d29", "top": "#7a5238"}]}</script>
 
   <canvas id="scene"></canvas>
 
   <div class="topbar">
     <div class="top">
-      <div class="brand"><div class="kick"><svg class="wordmark" viewBox="0 0 530 264" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="kick"><svg class="wordmark" viewBox="0 0 530 264" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M44.4366 25.2476C45.6703 24.5063 46.9996 23.9373 48.3877 23.5566C54.0984 21.9872 63.4158 21.8873 68.7452 24.9332C74.5702 27.7668 73.9874 30.3823 76.5956 33.5182L77.0096 33.4048C78.9111 35.5932 80.842 39.8627 79.8275 42.7225C79.9662 43.1635 80.3508 44.5039 80.54 44.834C82.9231 46.5619 83.6993 49.0276 82.5449 51.7744C82.7671 52.4481 84.1383 56.3352 84.1565 56.5075C85.074 57.699 86.1541 59.2982 87.7779 59.5137C94.9639 60.4673 96.6536 34.198 104.928 27.8843C112.378 19.641 125.232 22.6225 132.517 29.2616C136.559 32.945 138.59 37.3727 140.209 42.499C145.099 56.4291 143.804 70.9 143.236 85.3606C142.661 100.004 143.287 114.493 143.453 129.143C143.562 138.756 143.949 150.643 137.395 158.478C132.489 164.13 122.51 162.814 116.431 159.481C111.993 157.774 107.292 153.723 105.357 149.349C102.029 143.912 102.594 138.068 103.182 132.041L102.747 131.343C102.87 127.542 102.649 125.669 104.791 122.551L105.139 122.992C106.165 120.123 107.288 116.216 108.068 113.267C106.39 106.875 113.222 99.0678 108.773 93.1016L109.19 92.4448L108.7 92.6606L107.828 91.5475C105.036 90.9817 104.598 96.0411 102.216 97.4171L101.963 97.8801C99.9493 101.63 99.2932 105.584 96.5159 109.139C89.7751 117.768 79.4132 112.592 75.2392 104.504C71.6556 98.4027 69.7391 79.233 63.9041 76.8038C60.9079 77.4308 60.7663 88.8167 61.3424 91.2891C63.1689 93.5671 62.8929 102.714 63.5596 105.909C64.1055 108.525 65.5862 110.196 65.6464 112.655L64.8295 113.323C65.0422 115.107 65.9234 122.589 65.2314 123.908C65.0396 123.363 64.932 123.074 64.7924 122.511C64.3198 132.118 60.4426 136.601 50.2075 133.802C43.9127 132.083 32.6849 125.23 29.4735 119.545C25.864 114.813 23.5895 105.858 24.4464 99.8959C27.3203 79.8965 31.7717 60.0946 34.8073 40.1006C35.7452 33.923 39.0387 28.5641 44.4366 25.2476Z" fill="#5A48CF"/>
 <path d="M104.928 27.8846C112.378 19.6413 125.232 22.6228 132.517 29.2619C136.559 32.9453 138.59 37.373 140.209 42.4993C145.099 56.4294 143.804 70.9003 143.236 85.3609C142.661 100.004 143.287 114.493 143.453 129.144C143.562 138.756 143.949 150.643 137.395 158.479C132.489 164.13 122.51 162.814 116.431 159.481C117.927 159.414 119.088 159.852 120.551 160.304C124.383 161.54 129.599 162.318 133.404 160.566C140.426 157.329 141.934 145.977 142.31 139.496C143.055 126.623 141.781 114.196 141.781 101.373C141.781 86.0635 143.407 71.0092 142.106 55.7505C141.678 50.7359 139.698 43.1004 137.657 38.4758C135.222 32.9607 130.982 28.08 125.257 25.8999C115.116 22.0381 113.713 24.0074 104.928 27.8846Z" fill="#5C44C1"/>
 <path d="M68.7451 24.9336C74.5702 27.7672 73.9874 30.3827 76.5955 33.5186L77.0096 33.4052C78.911 35.5936 80.8419 39.8631 79.8275 42.7229C79.9662 43.1639 80.3507 44.5043 80.54 44.8344C82.923 46.5623 83.6992 49.028 82.5449 51.7748C82.7671 52.4485 84.1382 56.3356 84.1565 56.5079L83.6868 56.5335C81.9781 54.1425 81.1708 49.3773 80.2463 46.5601C77.9196 39.4698 76.0819 32.8048 70.7788 27.2837C70.0487 26.5238 69.2882 25.8526 68.7451 24.9336Z" fill="#5C44C1"/>
@@ -315,23 +371,23 @@ img{display:block}
 <path d="M467.921 36.2471C469.17 40.1681 470.233 45.6272 470.416 49.7798C470.246 49.8163 470.384 49.8041 469.849 49.732C469.199 45.8171 467.188 40.1957 467.921 36.2471Z" fill="#F9D3FA"/>
 <path d="M474.271 95.7998C476.622 96.6852 478.412 99.8807 478.585 102.264C477.189 101.078 475.187 97.4448 474.271 95.7998Z" fill="#5C44C1"/>
 <path d="M245.699 162.885C246.777 163.128 247.467 164.447 248.316 165.283C249.309 166.26 249.041 169.171 248.893 170.516L246.871 165.581L245.699 162.885Z" fill="#F9D3FA"/>
-</svg></div><h1>Racik pesananmu</h1></div>
-      <div class="counter" id="counter"><b id="cFill">0</b> / <span id="cCap">6</span> terisi</div>
+</svg></div><h1 class="ttl">Order</h1>
+      <div class="counter" id="counter"><span class="cbar" id="cBar"></span><span class="ctxt"><b id="cFill">0</b> / <span id="cCap">6</span> terisi</span></div>
     </div>
     <div class="pswitch" id="pswitch">
       <button type="button" data-cat="mochi" class="on">Mochi Box</button>
       <button type="button" data-cat="dubai">Dubai Chewy Cookie</button>
     </div>
+    <div class="promo-ribbon" id="promoRibbon" hidden></div>
     <div class="boxsel" id="boxsel">
-      <button type="button" data-cap="2">Box 2</button>
       <button type="button" data-cap="4">Box 4</button>
       <button type="button" data-cap="6" class="on">Box 6</button>
       <button type="button" data-cap="9">Box 9</button>
     </div>
-    <div class="hint" id="hint">putar dengan jari &middot; ketuk mochi untuk hapus</div>
+    <div class="hint" id="hint">ketuk rasa di bawah untuk mulai isi box 👇</div>
     <div class="scene-actions" id="sceneActions">
-      <button type="button" id="btnRekom" aria-label="Rekomendasi rasa" title="Rekomendasi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg></button>
-      <button type="button" id="btnClear" class="sa-trash" aria-label="Kosongkan box" title="Kosongkan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></button>
+      <button type="button" id="btnRekom" aria-label="Isi otomatis rekomendasi rasa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg><span>Auto-isi</span></button>
+      <button type="button" id="btnClear" class="sa-trash" aria-label="Kosongkan box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg><span>Kosongkan</span></button>
     </div>
   </div>
 
@@ -504,6 +560,7 @@ img{display:block}
 </defs>
 </svg></div>
   <div class="toast" id="toast"></div>
+  <div class="cal-pop" id="calPop" hidden><div class="cal-card" id="calCard"></div></div>
 <script>/**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -1568,7 +1625,7 @@ var IMGDETAIL={"straw": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBD
 /* ===================== CONFIG (one source of truth) ===================== */
 var CONFIG={
   boxes:[
-    {cap:2,layout:[2,1]},{cap:4,layout:[2,2]},{cap:6,layout:[3,2]},{cap:9,layout:[3,3]}
+    {cap:4,layout:[2,2]},{cap:6,layout:[3,2]},{cap:9,layout:[3,3]}
   ],
   mochi:[
     {id:"straw",  name:"Mochi Strawberry Madness", short:"Strawberry Madness", subtitle:"cheesecake creamy + stroberi pur\u00e9e", price:15000, badge:"Terlaris", color:0xEC86A8, top:0xF6B8CD, rating:4.9, sold:"240+ porsi terjual", desc:"Kulit mochi stroberi yang lembut dan kenyal, dibalut isian cheesecake creamy yang gurih. Di tengahnya ada selai stroberi asli yang juicy, jadi tiap gigitan terasa manis-asam yang segar dan seimbang. Cocok buat yang suka rasa fruity tapi tetap creamy.", profil:[["Manis",4],["Asam segar",4],["Creamy",4],["Kenyal",5]], chips:["\ud83d\udd25 Best seller","\ud83c\udf53 Stroberi asli","\ud83d\udd01 Sering di-repeat"], tags:["Terlaris","Creamy","Fruity"]},
@@ -1576,12 +1633,12 @@ var CONFIG={
     {id:"choco",  name:"Mochi Classic Choco", short:"Classic Choco", subtitle:"cream cokelat velvety", price:12500, badge:"Terlaris", color:0x7E5B45, top:0xA07A60, rating:4.9, sold:"300+ porsi terjual", desc:"Mochi cokelat lembut dan kenyal dengan isian cream kakao yang velvety. Dibuat dari cokelat premium, jadi rasanya intens tapi tetap smooth. Pilihan paling aman buat pencinta cokelat.", profil:[["Manis",4],["Cokelat",5],["Creamy",5],["Kenyal",5]], chips:["\ud83d\udd25 Best seller","\ud83c\udf6b Cokelat premium","\ud83d\udc9c Klasik"], tags:["Terlaris","Cokelat","Creamy"]},
     {id:"matcha", name:"Mochi Matcha ChaCha", short:"Matcha ChaCha", subtitle:"cream matcha milky", price:12500, badge:"Baru", color:0x97BB79, top:0xBBD3A2, rating:4.8, sold:"180+ porsi terjual", desc:"Mochi matcha lembut dan kenyal dengan cream matcha milky di dalamnya. Rasa matcha-nya earthy tapi seimbang sama manis susu, jadi nggak pahit berlebihan. Pas buat yang suka matcha autentik.", profil:[["Manis",3],["Earthy",4],["Creamy",4],["Kenyal",5]], chips:["\ud83c\udf75 Matcha asli","\ud83e\udd5b Milky","\ud83c\udf43 Earthy"], tags:["Baru","Matcha","Creamy"]},
     {id:"cookie", name:"Mochi Cheesy Cookies", short:"Cheesy Cookies", subtitle:"cheesecake + remahan oreo", price:15000, badge:"Terlaris", color:0xE7D3A6, top:0xF3E6C6, rating:4.9, sold:"260+ porsi terjual", desc:"Mochi vanilla lembut dan kenyal dengan isian cream keju yang rich, dicampur potongan oreo yang crunchy. Perpaduan creamy dan renyah yang bikin nagih di tiap gigitan.", profil:[["Manis",4],["Gurih keju",4],["Creamy",5],["Crunchy",4]], chips:["\ud83d\udd25 Best seller","\ud83c\udf6a Oreo crunch","\ud83e\uddc0 Cheesy"], tags:["Terlaris","Creamy","Crunchy"]},
-    {id:"mango",  name:"Mochi Kunafa? Gafafa OG", short:"Kunafa OG", subtitle:"pistachio kunafa + kataifi", price:25000, badge:"Baru", color:0xE6B24F, top:0xF1CE83, rating:4.9, sold:"Viral menu", desc:"Mochi cokelat lembut dan kenyal dengan isian pistachio kunafa yang creamy dan kaya. Perpaduan cokelat dengan kataifi renyah di tiap gigitan, rasa Dubai-style yang lagi hype.", profil:[["Manis",4],["Nutty",5],["Creamy",4],["Crunchy",5]], chips:["\u2728 Viral","\ud83e\udd5c Pistachio asli","\ud83e\udeb5 Kataifi crunch"], tags:["Baru","Pistachio","Crunchy"]},
-    {id:"kunafa2",name:"Mochi Kunafa? Gafafa V2", short:"Kunafa V2", subtitle:"cheesecake + pistachio, lapis cokelat", price:25000, badge:null, color:0xD79B36, top:0xE9BE70, rating:4.8, sold:"Edisi spesial", desc:"Mochi cokelat berlapis cokelat, lembut dan kenyal, dengan isian cheesecake creamy plus pistachio kunafa. Ada kataifi renyah di dalamnya, jadi tekstur dan rasanya makin kompleks.", profil:[["Manis",4],["Nutty",5],["Creamy",5],["Crunchy",4]], chips:["\ud83c\udf6b Lapis cokelat","\ud83e\udd5c Pistachio","\ud83e\uddc0 Cheesy"], tags:["Chocolate layer","Pistachio"]}
+    {id:"mango",  name:"Mochi Kunafa? Gafafa OG", short:"Kunafa OG", subtitle:"pistachio kunafa + kataifi", price:25000, badge:"Terlaris", color:0xE6B24F, top:0xF1CE83, rating:4.9, sold:"Viral menu", desc:"Mochi cokelat lembut dan kenyal dengan isian pistachio kunafa yang creamy dan kaya. Perpaduan cokelat dengan kataifi renyah di tiap gigitan, rasa Dubai-style yang lagi hype.", profil:[["Manis",4],["Nutty",5],["Creamy",4],["Crunchy",5]], chips:["\u2728 Viral","\ud83e\udd5c Pistachio asli","\ud83e\udeb5 Kataifi crunch"], tags:["Baru","Pistachio","Crunchy"]},
+    {id:"kunafa2",name:"Mochi Kunafa? Gafafa V2", short:"Kunafa V2", subtitle:"cheesecake + pistachio, lapis cokelat", price:25000, badge:"Baru", color:0xD79B36, top:0xE9BE70, rating:4.8, sold:"Edisi spesial", desc:"Mochi cokelat berlapis cokelat, lembut dan kenyal, dengan isian cheesecake creamy plus pistachio kunafa. Ada kataifi renyah di dalamnya, jadi tekstur dan rasanya makin kompleks.", profil:[["Manis",4],["Nutty",5],["Creamy",5],["Crunchy",4]], chips:["\ud83c\udf6b Lapis cokelat","\ud83e\udd5c Pistachio","\ud83e\uddc0 Cheesy"], tags:["Chocolate layer","Pistachio"]}
   ],
   dubai:[
-    {id:"dcc_s", name:"Dubai Chewy Cookie Small", short:"Small", subtitle:"pistachio kunafa + kataifi", price:25000, badge:"Baru", color:0x6B4A33, top:0x8A6348, rating:4.9, sold:"Menu baru", desc:"Cookie cokelat kenyal dan kaya dengan isian pistachio kunafa yang renyah. Perpaduan nutty, buttery, dan cokelat di tiap gigitan. Ukuran small, pas buat dicoba.", profil:[["Manis",4],["Nutty",5],["Buttery",4],["Crunchy",5]], chips:["\u2728 Baru","\ud83e\udd5c Pistachio","\ud83e\udeb5 Kataifi crunch"], tags:["Baru","Pistachio","Crunchy","Chocolate"]},
-    {id:"dcc_b", name:"Dubai Chewy Cookie Big", short:"Big", subtitle:"pistachio kunafa + kataifi", price:35000, badge:"Terlaris", color:0x5A3D29, top:0x7A5238, rating:4.9, sold:"Best seller", desc:"Cookie kenyal ala Dubai isi pistachio kunafa dan kataifi renyah, dilapisi cokelat. Manis, gurih, dan crunchy sekaligus. Ukuran big buat yang mau puas.", profil:[["Manis",4],["Nutty",5],["Buttery",5],["Crunchy",5]], chips:["\ud83d\udd25 Best seller","\ud83e\udd5c Pistachio","\ud83c\udf6b Lapis cokelat"], tags:["Terlaris","Pistachio","Crunchy","Chocolate"]}
+    {id:"dcc_s", name:"Dubai Chewy Cookie Small", short:"Small", subtitle:"pistachio kunafa + kataifi", price:25000, badge:"Terlaris", color:0x6B4A33, top:0x8A6348, rating:4.9, sold:"Menu baru", desc:"Cookie cokelat kenyal dan kaya dengan isian pistachio kunafa yang renyah. Perpaduan nutty, buttery, dan cokelat di tiap gigitan. Ukuran small, pas buat dicoba.", profil:[["Manis",4],["Nutty",5],["Buttery",4],["Crunchy",5]], chips:["\u2728 Baru","\ud83e\udd5c Pistachio","\ud83e\udeb5 Kataifi crunch"], tags:["Baru","Pistachio","Crunchy","Chocolate"]},
+    {id:"dcc_b", name:"Dubai Chewy Cookie Big", short:"Big", subtitle:"pistachio kunafa + kataifi", price:35000, badge:"Baru", color:0x5A3D29, top:0x7A5238, rating:4.9, sold:"Best seller", desc:"Cookie kenyal ala Dubai isi pistachio kunafa dan kataifi renyah, dilapisi cokelat. Manis, gurih, dan crunchy sekaligus. Ukuran big buat yang mau puas.", profil:[["Manis",4],["Nutty",5],["Buttery",5],["Crunchy",5]], chips:["\ud83d\udd25 Best seller","\ud83e\udd5c Pistachio","\ud83c\udf6b Lapis cokelat"], tags:["Terlaris","Pistachio","Crunchy","Chocolate"]}
   ]
 };
 var PMAP={};
@@ -1609,6 +1666,7 @@ var REKOM=["straw","matcha","choco","cookie","mango","grape","kunafa2"].filter(f
 if(!REKOM.length) REKOM=CONFIG.mochi.map(function(p){ return p.id; });
 
 function rupiah(n){ return "Rp"+(n||0).toLocaleString("id-ID"); }
+function kRp(n){ n=n||0; return (n%1000===0?(n/1000):(n/1000).toLocaleString("id-ID"))+"rb"; }
 /* ===== discount engine ===== */
 function DISC(){ var d=STORE.discount||{}; return {on:!!d.on,type:d.type||"percent",value:+d.value||0,label:d.label||"Promo",scope:d.scope||"all"}; }
 function discApplies(p){ var d=DISC(); if(!d.on||d.value<=0||!p) return false; if(Array.isArray(d.scope)) return d.scope.indexOf(p.id)>=0; return true; }
@@ -1624,7 +1682,7 @@ function $(id){ return document.getElementById(id); }
 /* ===================== STATE ===================== */
 var cap=6, slots=[], activeCat="mochi";
 var dubaiQty={dcc_s:0, dcc_b:0};
-var ckPick=null, ckWeekOff=0, ckMethod="";
+var ckPick=null, ckWeekOff=0, ckMethod="", ckClosedTap="";
 var R=0.52, GAP=1.28, WALL=0.42, slotPos=[];
 
 /* ===================== 3D ENGINE ===================== */
@@ -1685,7 +1743,11 @@ function makeMochi(p){ var grp=new THREE.Group();
   grp.userData.flavor=p.id; return grp; }
 var anims=[];
 function filled(){ var n=0; for(var i=0;i<cap;i++) if(slots[i]) n++; return n; }
-function addMochi(id){ var idx=-1; for(var i=0;i<cap;i++){ if(!slots[i]){ idx=i; break; } } if(idx<0){ flashFull(); toast("Box "+cap+" sudah penuh"); return false; }
+function addMochi(id){ var idx=-1; for(var i=0;i<cap;i++){ if(!slots[i]){ idx=i; break; } } if(idx<0){ flashFull();
+    var next=null; for(var b=0;b<CONFIG.boxes.length;b++){ if(CONFIG.boxes[b].cap>cap){ next=CONFIG.boxes[b].cap; break; } }
+    if(next){ toast("Box "+cap+" penuh","Upgrade Box "+next,function(){ setCap(next,id); }); }
+    else toast("Box "+cap+" sudah penuh");
+    return false; }
   var p=PMAP[id], m=makeMochi(p), pos=slotPos[idx]; m.position.set(pos.x,pos.y+4.5,pos.z); m.scale.setScalar(0.6); mochiGroup.add(m);
   slots[idx]={flavorId:id,mesh:m}; anims.push({mesh:m,t0:performance.now(),from:pos.y+4.5,to:pos.y,x:pos.x,z:pos.z}); controls.autoRotate=false; sync(); return true; }
 function removeAt(idx){ if(!slots[idx]) return; mochiGroup.remove(slots[idx].mesh); slots[idx]=null; sync(); }
@@ -1718,7 +1780,8 @@ function buildFlavors(){ var w=$("flavors"); w.innerHTML="";
     fl.innerHTML=bdg+
       '<button type="button" class="dot" data-add="'+p.id+'" aria-label="Tambah '+esc(p.short)+'">'+(p.image?'<img src="'+p.image+'" alt="" onerror="this.style.display=&#39;none&#39;">':'')+'</button>'+
       '<span class="fcnt" data-cnt="'+p.id+'" style="display:none"></span>'+
-      '<button type="button" class="nm" data-detail="'+p.id+'">'+p.short+'</button>';
+      '<button type="button" class="nm" data-detail="'+p.id+'">'+p.short+'</button>'+
+      '<span class="fprice">'+(discApplies(p)?'<s>'+kRp(wasUnit(p))+'</s>':'')+kRp(p.price)+'</span>';
     w.appendChild(fl); });
   w.addEventListener("click",function(e){ var a=e.target.closest("[data-add]"), d=e.target.closest("[data-detail]");
     if(a){ addMochi(a.dataset.add); } else if(d){ openDetail(d.dataset.detail); } });
@@ -1731,7 +1794,7 @@ function buildDubai(){ var w=$("dubaiGrid"); w.innerHTML="";
     var pill=p.badge?('<span class="dpill '+(p.badge==="Terlaris"?"terlaris":"baru")+'">'+p.badge+'</span>'):'';
     var thumb='<div class="dthumb">'+(p.image?'<img src="'+p.image+'" alt="'+esc(p.name)+'">':'')+'</div>';
     c.innerHTML=thumb+
-      '<div class="dinfo"><div class="dtop"><div class="dname">'+p.name+'</div>'+pill+'</div><div class="dsub">'+p.subtitle+'</div><div class="dprice">'+rupiah(p.price)+'<span> /pcs</span></div><button type="button" class="dlink" data-detail="'+p.id+'" style="margin-top:5px">Lihat detail</button></div>'+
+      '<div class="dinfo"><div class="dtop"><div class="dname">'+p.name+'</div>'+pill+'</div><div class="dsub">'+p.subtitle+'</div><div class="dprice">'+(discApplies(p)?'<s class="dwas">'+rupiah(wasUnit(p))+'</s>':'')+rupiah(p.price)+'<span> /pcs</span></div><button type="button" class="dlink" data-detail="'+p.id+'" style="margin-top:5px">Lihat detail</button></div>'+
       '<div class="dright"><div class="stp"><button type="button" data-dq="m" data-id="'+p.id+'" aria-label="Kurangi">'+SVG_MINUS+'</button><b data-qn="'+p.id+'">'+dubaiQty[p.id]+'</b><button type="button" data-dq="p" data-id="'+p.id+'" aria-label="Tambah">'+SVG_PLUS+'</button></div></div>';
     w.appendChild(c); });
   w.addEventListener("click",function(e){ var s=e.target.closest("[data-dq]"), d=e.target.closest("[data-detail]");
@@ -1776,13 +1839,15 @@ function d0(d){ var x=new Date(d); x.setHours(0,0,0,0); return x; }
 function dHash(d){ var n=d.getFullYear()*372+(d.getMonth()+1)*31+d.getDate(); n=(n*2654435761)%2147483647; return n<0?-n:n; }
 function dateStatus(d){ var t=d0(new Date()), dd=d0(d), diff=Math.round((dd-t)/86400000);
   if(diff<0) return "lewat";
-  var ok=STORE.dates&&STORE.dates[dd.getFullYear()+"-"+(dd.getMonth()+1)+"-"+dd.getDate()];
-  if(ok==="bisa"||ok==="konfirmasi"||ok==="penuh") return ok;
-  var w=dd.getDay();
-  if(w===0) return "penuh";        /* Minggu: tutup */
-  if(w===6) return "konfirmasi";   /* Sabtu: perlu konfirmasi */
-  if(diff<2) return "konfirmasi";  /* pre-order fresh H+2 */
-  return "bisa"; }
+  var ok=STORE.dates&&STORE.dates[dd.getFullYear()+"-"+(dd.getMonth()+1)+"-"+dd.getDate()], base;
+  if(ok==="bisa"||ok==="konfirmasi"||ok==="penuh") base=ok;
+  else { var w=dd.getDay();
+    if(w===0) base="penuh";        /* Minggu: tutup */
+    else if(w===6) base="konfirmasi";   /* Sabtu: perlu konfirmasi */
+    else if(diff<2) base="konfirmasi";  /* pre-order fresh H+2 */
+    else base="bisa"; }
+  if(base!=="penuh" && ckMethod && !methodAvail(ckMethod,d)) base="penuh"; /* metode kepilih tutup di tgl ini */
+  return base; }
 function fmtDate(d){ return d?(DOWS[d.getDay()]+", "+d.getDate()+" "+MONS[d.getMonth()]+" "+d.getFullYear()):"-"; }
 function statusLabel(s){ return s==="bisa"?"Bisa langsung":s==="konfirmasi"?"Perlu konfirmasi":s==="penuh"?"Penuh":""; }
 function mondayThisWeek(){ var t=d0(new Date()), w=(t.getDay()+6)%7; t.setDate(t.getDate()-w); return t; }
@@ -1799,22 +1864,43 @@ function renderDate(){ var sec=$("dateSec"); if(!sec) return; ensurePick();
   else if(st==="bisa") msg='<div class="dmsg ok">'+fmtDate(ckPick)+': paling aman untuk pre-order. Pesanan dibuat fresh setelah pembayaran dikonfirmasi.</div>';
   var minD=d0(new Date()), mn=minD.getFullYear()+"-"+String(minD.getMonth()+1).padStart(2,"0")+"-"+String(minD.getDate()).padStart(2,"0");
   sec.innerHTML='<div class="o-h">Tanggal ambil / kirim</div><div class="o-hint">Karena dibuat fresh, pilih tanggal minimal 1\u20132 hari kerja setelah pesan. Paling aman pilih H+2.</div>'+
-    '<div class="dhead"><b>'+range+'</b><div class="dnav"><button type="button" class="dnav-b" id="dPrev"'+(ckWeekOff<=0?" disabled":"")+' aria-label="Minggu sebelumnya">\u2039</button><button type="button" class="dnav-b" id="dNext" aria-label="Minggu berikutnya">\u203a</button><button type="button" class="dall" id="dAllBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Pilih tanggal</button><input type="date" id="dAll" class="dhidden" min="'+mn+'"></div></div>'+
+    '<div class="dhead"><b>'+range+'</b><div class="dnav"><button type="button" class="dnav-b" id="dPrev"'+(ckWeekOff<=0?" disabled":"")+' aria-label="Minggu sebelumnya">\u2039</button><button type="button" class="dnav-b" id="dNext" aria-label="Minggu berikutnya">\u203a</button><button type="button" class="dall" id="dAllBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Pilih tanggal</button></div></div>'+
     '<div class="dcells">'+cells+'</div>'+msg+
-    '<div class="dlegend"><span class="lg">\u2713 Bisa langsung</span><span class="lg">! Perlu konfirmasi</span><span class="lg">\u2715 Penuh</span></div>';
-  sec.querySelector(".dcells").addEventListener("click",function(e){ var b=e.target.closest(".dcell"); if(!b||b.disabled) return; var p=b.dataset.d.split("-"); ckPick=new Date(+p[0],+p[1]-1,+p[2]); renderDate(); renderMethod(); sync(); });
+    '<div class="dlegend"><span class="lg"><i class="lg-ic bisa">\u2713</i>Bisa langsung</span><span class="lg"><i class="lg-ic konf">!</i>Perlu konfirmasi</span><span class="lg"><i class="lg-ic penuh">\u2715</i>Penuh</span></div>';
+  sec.querySelector(".dcells").addEventListener("click",function(e){ var b=e.target.closest(".dcell"); if(!b||b.disabled) return; var p=b.dataset.d.split("-"); ckPick=new Date(+p[0],+p[1]-1,+p[2]); ckClosedTap=""; renderDate(); renderMethod(); sync(); });
   $("dPrev").addEventListener("click",function(){ if(ckWeekOff>0){ ckWeekOff--; renderDate(); } });
   $("dNext").addEventListener("click",function(){ ckWeekOff++; renderDate(); });
-  $("dAllBtn").addEventListener("click",function(){ var inp=$("dAll"); try{ if(inp.showPicker) inp.showPicker(); else { inp.focus(); inp.click(); } }catch(_){ inp.focus(); } });
-  $("dAll").addEventListener("change",function(){ if(this.value){ var p=this.value.split("-"); ckPick=new Date(+p[0],+p[1]-1,+p[2]); ckWeekOff=Math.max(0,weekOffOf(ckPick)); renderDate(); renderMethod(); sync(); } });
+  $("dAllBtn").addEventListener("click",openCalPop);
+}
+
+var calM=null;
+function openCalPop(){ var n=new Date(); calM=ckPick?new Date(ckPick.getFullYear(),ckPick.getMonth(),1):new Date(n.getFullYear(),n.getMonth(),1); var pop=$("calPop"); pop.hidden=false; requestAnimationFrame(function(){ pop.classList.add("show"); }); renderCalPop(); }
+function closeCalPop(){ var pop=$("calPop"); pop.classList.remove("show"); setTimeout(function(){ pop.hidden=true; },180); }
+function renderCalPop(){ var card=$("calCard"); if(!card) return;
+  var y=calM.getFullYear(), mo=calM.getMonth(), startDow=new Date(y,mo,1).getDay(), daysIn=new Date(y,mo+1,0).getDate();
+  var now=new Date(), thisM0=new Date(now.getFullYear(),now.getMonth(),1), canPrev=(calM>thisM0);
+  var head='<div class="cal-h"><button type="button" class="cal-nav" id="calPrev"'+(canPrev?"":" disabled")+' aria-label="Bulan sebelumnya">\u2039</button><b>'+MONS[mo]+" "+y+'</b><button type="button" class="cal-nav" id="calNext" aria-label="Bulan berikutnya">\u203a</button></div>';
+  var dow='<div class="cal-dow">'+["Min","Sen","Sel","Rab","Kam","Jum","Sab"].map(function(d){ return '<span>'+d+'</span>'; }).join("")+'</div>';
+  var cells=""; for(var i=0;i<startDow;i++) cells+='<span class="cal-cell empty"></span>';
+  for(var dn=1;dn<=daysIn;dn++){ var d=new Date(y,mo,dn), st=dateStatus(d), dis=(st==="penuh"||st==="lewat"), on=ckPick&&d0(d).getTime()===d0(ckPick).getTime();
+    var ico=st==="bisa"?'<i class="ci bisa">\u2713</i>':st==="konfirmasi"?'<i class="ci konf">!</i>':st==="penuh"?'<i class="ci penuh">\u2715</i>':'<i class="ci gone">\u2014</i>';
+    cells+='<button type="button" class="cal-cell '+st+(on?" on":"")+'"'+(dis?" disabled":"")+' data-d="'+y+'-'+(mo+1)+'-'+dn+'"><span class="cd-n">'+dn+'</span>'+ico+'</button>'; }
+  var grid='<div class="cal-grid">'+cells+'</div>';
+  var lg='<div class="cal-lg"><span><i class="lg-ic bisa">\u2713</i>Bisa langsung</span><span><i class="lg-ic konf">!</i>Perlu konfirmasi</span><span><i class="lg-ic penuh">\u2715</i>Penuh</span></div>';
+  card.innerHTML=head+dow+grid+lg+'<button type="button" class="cal-close" id="calClose">Tutup</button>';
+  $("calPrev").addEventListener("click",function(){ if(canPrev){ calM=new Date(y,mo-1,1); renderCalPop(); } });
+  $("calNext").addEventListener("click",function(){ calM=new Date(y,mo+1,1); renderCalPop(); });
+  $("calClose").addEventListener("click",closeCalPop);
+  card.querySelector(".cal-grid").addEventListener("click",function(e){ var b=e.target.closest(".cal-cell"); if(!b||b.disabled||!b.dataset.d) return; var p=b.dataset.d.split("-"); ckPick=new Date(+p[0],+p[1]-1,+p[2]); ckWeekOff=Math.max(0,weekOffOf(ckPick)); ckClosedTap=""; closeCalPop(); renderDate(); renderMethod(); sync(); });
 }
 
 /* ===================== METHOD ===================== */
 var METHODS={
-  pickup:{label:"Ambil Sendiri",short:"Ambil Sendiri",emoji:"\uD83C\uDFE0",help:"Alamat lengkap dan jam pengambilan akan dikirim setelah pesanan dikonfirmasi.",warn:false},
-  cafe:{label:"COD area kafe",short:"COD",emoji:"\uD83D\uDCB5",help:"Kami cuma bisa COD di area kafe yang lagi kami kunjungi, atau di sisi jalan dekat kafe. Melayani area Bogor-Sukabumi. Lokasi dan jam dikonfirmasi dulu lewat WhatsApp.",warn:true},
-  delivery:{label:"Diantar Ojol",short:"Diantar Ojol",emoji:"\uD83D\uDEF5",help:"Pengiriman pakai Gojek/Grab sesuai area. Ongkir ditanggung pembeli dan dikonfirmasi lewat WhatsApp.",warn:false}
+  pickup:{label:"Ambil di Dapur",short:"Ambil di Dapur",emoji:"\uD83C\uDFE0",sub:"Gratis Ongkir",help:"Ambil langsung di dapur kami. Alamat lengkap & jam pengambilan dikirim setelah pesanan dikonfirmasi.",warn:false,fee:0},
+  cafe:{label:"COD area kafe",short:"COD",emoji:"\u2615",sub:"+Rp5.000",help:"Area Sukabumi-Bogor, atau di sisi jalan dekat cafenya. Titik & jam dikonfirmasi dulu ya \uD83D\uDE4F",warn:true,fee:5000},
+  delivery:{label:"Diantar Ojol",short:"Diantar Ojol",emoji:"\uD83D\uDEF5",sub:"Ongkir Diakhir",help:"Pengiriman pakai Gojek/Grab. Ongkir dikonfirmasi setelah kasih alamat.",warn:false,fee:0}
 };
+function methodFee(){ return (ckMethod&&METHODS[ckMethod]&&METHODS[ckMethod].fee)||0; }
 function methodAvail(key,d){ if(!d) return true; var w=d.getDay();
   if(w===0) return false;                              /* Minggu: semua tutup */
   if(key==="pickup"||key==="delivery") return true;    /* tiap hari kecuali Minggu */
@@ -1824,10 +1910,11 @@ function renderMethod(){ var sec=$("methodSec"); if(!sec) return;
   if(ckMethod && !methodAvail(ckMethod,ckPick)) ckMethod="";
   var cards="";
   Object.keys(METHODS).forEach(function(k){ var m=METHODS[k], av=methodAvail(k,ckPick);
-    cards+='<button type="button" class="mcard'+(ckMethod===k?" on":"")+(av?"":" dis")+'"'+(av?"":" disabled")+' data-mk="'+k+'"><div class="mc-e">'+m.emoji+'</div><div class="mc-t">'+(m.short||m.label)+'</div>'+(av?"":'<div class="mc-na">tutup tgl ini</div>')+'</button>'; });
-  var help=ckMethod&&METHODS[ckMethod]?('<div class="mhelp'+(METHODS[ckMethod].warn?" warn":"")+'">'+METHODS[ckMethod].help+'</div>'):'';
+    var sub=av?(m.sub||""):"Full";
+    cards+='<button type="button" class="mcard'+(ckMethod===k?" on":"")+(av?"":" dis")+'" data-mk="'+k+'" data-av="'+(av?1:0)+'"><div class="mc-e">'+m.emoji+'</div><div class="mc-t">'+(m.short||m.label)+'</div><div class="mc-s'+(av?"":" na")+'">'+sub+'</div></button>'; });
+  var help=(ckMethod&&METHODS[ckMethod]&&METHODS[ckMethod].help)?('<div class="mhelp'+(METHODS[ckMethod].warn?" warn":"")+'">'+METHODS[ckMethod].help+'</div>'):'';
   sec.innerHTML='<div class="o-h">Metode ambil / kirim</div><div class="mcards">'+cards+'</div>'+help;
-  sec.querySelector(".mcards").addEventListener("click",function(e){ var b=e.target.closest(".mcard"); if(!b||b.disabled) return; ckMethod=b.dataset.mk; renderMethod(); sync(); });
+  sec.querySelector(".mcards").addEventListener("click",function(e){ var b=e.target.closest(".mcard"); if(!b||b.dataset.av==="0") return; ckMethod=b.dataset.mk; renderMethod(); renderDate(); sync(); });
 }
 
 /* ===================== DETAIL MODAL ===================== */
@@ -1856,6 +1943,7 @@ function openDetail(id){ var p=PMAP[id], isD=(p.id==="dcc_s"||p.id==="dcc_b");
 function showModal(){ $("backdrop").hidden=false; $("modal").hidden=false; requestAnimationFrame(function(){ $("backdrop").classList.add("show"); $("modal").classList.add("show"); }); }
 function closeModal(){ $("backdrop").classList.remove("show"); $("modal").classList.remove("show"); setTimeout(function(){ $("backdrop").hidden=true; $("modal").hidden=true; },240); }
 $("backdrop").addEventListener("click",closeModal);
+$("calPop").addEventListener("click",function(e){ if(e.target===this) closeCalPop(); });
 document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ if(!$("modal").hidden) closeModal(); else if(!$("checkout").hidden) closeCheckout(); } });
 
 /* ===================== CATEGORY SWITCH (overlay) ===================== */
@@ -1880,13 +1968,16 @@ function openCheckout(){ if(cartEmpty()) return;
   $("checkoutIn").innerHTML=
     '<div class="sheet-grab"></div>'+logoMark()+
     '<div class="ck-title">Ringkasan pesanan</div><div class="ck-sub">Cek dulu sebelum lanjut ke WhatsApp</div>'+
+    '<div class="ck-trust"><span>\u2b50 4.9 rating pelanggan</span><span>\ud83c\udf61 dibuat fresh tiap order</span><span>\ud83d\udcac respon cepat via WA</span></div>'+
     '<div id="summaryBox"></div>'+
     '<div id="dateSec" class="o-sec"></div>'+
     '<div id="methodSec" class="o-sec"></div>'+
     '<div class="o-sec"><div class="o-h">Catatan / request khusus</div><textarea id="notes" class="ck-area" rows="2" placeholder="Contoh: jangan terlalu manis, request rasa, untuk hadiah, ambil jam 3 sore.">'+esc(notesVal)+'</textarea></div>'+
+    '<div class="ck-fee" id="ckFee" hidden></div>'+
     '<div class="ck-total"><span>Total pesanan</span><b id="ckTotal">'+rupiah(grand())+'</b></div>'+
     '<div class="ck-save" id="ckSave" hidden></div>'+
-    '<div class="ck-note">Pre-order \u00b7 ready 1\u20132 hari kerja setelah pembayaran dikonfirmasi. Bisa bayar cash (COD) atau transfer, dikonfirmasi via WhatsApp.</div>'+
+    '<div class="ck-note">Pre-order \u00b7 ready 1\u20132 hari kerja setelah pembayaran dikonfirmasi.</div>'+
+    '<div class="mpay">\uD83D\uDCB5 Bisa bayar cash (COD), QRIS, atau transfer, dikonfirmasi via WhatsApp.</div>'+
     '<button type="button" class="ck-wa" id="ckWA" disabled>Pilih tanggal dulu</button>'+
     '<button type="button" class="ck-back" id="ckBack">Kembali ke pesanan</button>';
   buildSummary(); renderDate(); renderMethod(); updateWa();
@@ -1901,15 +1992,15 @@ function updateWa(){ var b=$("ckWA"); if(!b) return;
   if(!ckPick){ b.disabled=true; b.textContent="Pilih tanggal dulu"; }
   else if(!ckMethod){ b.disabled=true; b.textContent="Pilih metode dulu"; }
   else { b.disabled=false; b.textContent="Pesan via WhatsApp"; }
-  var t=$("ckTotal"); if(t) t.textContent=rupiah(grand());
+  var t=$("ckTotal"); if(t) t.textContent=rupiah(grand()+methodFee());
+  var cf=$("ckFee"); if(cf){ var fee=methodFee(); if(fee>0){ cf.hidden=false; cf.innerHTML='<span>'+esc(METHODS[ckMethod].label)+'</span><span class="cf-amt">+'+rupiah(fee)+'</span>'; } else cf.hidden=true; }
   var cs=$("ckSave"); if(cs){ var sv=savings(); if(sv>0){ cs.hidden=false; cs.innerHTML='<span class="cs-was">'+rupiah(wasGrand())+'</span><span class="cs-tag">'+esc(DISC().label)+' '+discLabel()+'</span><span class="cs-amt">\u2212'+rupiah(sv)+'</span>'; } else cs.hidden=true; }
 }
-$("ckBackdrop").addEventListener("click",closeCheckout);
-$("openCheckout").addEventListener("click",function(){ if(!this.disabled) openCheckout(); });
+$("ckBackdrop").addEventListener("click",closeCheckout);$("openCheckout").addEventListener("click",function(){ if(!this.disabled) openCheckout(); });
 
 /* ===================== BOX SELECT ===================== */
-$("boxsel").addEventListener("click",function(e){ var b=e.target.closest("button[data-cap]"); if(!b) return; var nc=+b.dataset.cap; if(nc===cap) return;
-  [].forEach.call(this.querySelectorAll("button"),function(x){ x.classList.toggle("on",+x.dataset.cap===nc); });
+function setCap(nc,extraId){ if(nc===cap&&!extraId) return;
+  [].forEach.call($("boxsel").querySelectorAll("button"),function(x){ x.classList.toggle("on",+x.dataset.cap===nc); });
   var keep=[]; for(var i=0;i<cap;i++){ if(slots[i]) keep.push(slots[i].flavorId); }
   var over=keep.length-nc; cap=nc; $("cCap").textContent=nc;
   for(var j=mochiGroup.children.length-1;j>=0;j--) mochiGroup.remove(mochiGroup.children[j]);
@@ -1917,17 +2008,35 @@ $("boxsel").addEventListener("click",function(e){ var b=e.target.closest("button
   keep=keep.slice(0,cap); buildBox();
   keep.forEach(function(id,ix){ var p=PMAP[id], m=makeMochi(p), pos=slotPos[ix]; m.position.set(pos.x,pos.y,pos.z); mochiGroup.add(m); slots[ix]={flavorId:id,mesh:m}; });
   frameCamera(); if(over>0) toast(over+" mochi dikeluarkan karena box lebih kecil"); sync();
-});
+  if(extraId) setTimeout(function(){ addMochi(extraId); },140);
+}
+$("boxsel").addEventListener("click",function(e){ var b=e.target.closest("button[data-cap]"); if(!b) return; setCap(+b.dataset.cap); });
 
 /* ===================== ACTIONS ===================== */
 $("btnRekom").addEventListener("click",function(){ clearAll(); var i=0; (function step(){ if(filled()>=cap) { toast("Rekomendasi rasa sudah diisi."); return; } addMochi(REKOM[i%REKOM.length]); i++; setTimeout(step,90); })(); });
-$("btnClear").addEventListener("click",function(){ clearAll(); controls.autoRotate=true; toast("Box dikosongkan"); });
+$("btnClear").addEventListener("click",function(){ var snap=[]; for(var i=0;i<cap;i++){ if(slots[i]) snap.push(slots[i].flavorId); }
+  if(!snap.length){ toast("Box sudah kosong"); return; }
+  clearAll(); controls.autoRotate=true;
+  toast("Box dikosongkan","Urungkan",function(){ snap.forEach(function(fid){ addMochi(fid); }); }); });
 
 /* ===================== SYNC (counts, total, CTA) ===================== */
+function updateHint(){ var h=$("hint"); if(!h) return; var n=filled();
+  if(n===0){ h.classList.remove("done"); h.innerHTML="ketuk rasa di bawah untuk mulai isi box \ud83d\udc47"; }
+  else if(n<cap){ h.classList.remove("done"); h.innerHTML="tinggal <b>"+(cap-n)+"</b> lagi \u00b7 ketuk mochi di box untuk hapus"; }
+  else { h.classList.add("done"); h.innerHTML="box penuh! lanjut checkout \ud83c\udf89"; }
+}
+function renderRibbon(){ var el=$("promoRibbon"); if(!el) return; var d=DISC();
+  if(d.on&&d.value>0){ el.hidden=false; el.innerHTML="\ud83c\udff7\ufe0f "+esc(d.label)+" "+discLabel()+" \u00b7 otomatis semua menu"; }
+  else el.hidden=true; }
 function sync(){
   var c=mochiCounts();
-  CONFIG.mochi.forEach(function(p){ var el=document.querySelector('[data-cnt="'+p.id+'"]'); if(el){ if(c[p.id]){ el.textContent="\u00d7"+c[p.id]; el.style.display="flex"; } else el.style.display="none"; } });
-  $("cFill").textContent=filled();
+  CONFIG.mochi.forEach(function(p){ var el=document.querySelector('[data-cnt="'+p.id+'"]'); if(el){ if(c[p.id]){ el.textContent="\u00d7"+c[p.id]; el.style.display="flex"; } else el.style.display="none"; }
+    var dt=document.querySelector('.dot[data-add="'+p.id+'"]'); if(dt) dt.classList.toggle("inbox",!!c[p.id]); });
+  var nFill=filled();
+  $("cFill").textContent=nFill;
+  var bar=$("cBar"); if(bar) bar.style.width=Math.round(nFill/cap*100)+"%";
+  $("counter").classList.toggle("full",nFill>=cap);
+  updateHint();
   $("grandTotal").textContent=rupiah(grand());
   var sv=savings(), d=DISC(), pp=$("pbPromo"), pw=$("pbWas");
   if(pp&&pw){ if(sv>0){ pp.hidden=false; pp.innerHTML='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg>'+esc(d.label)+' '+discLabel(); pw.hidden=false; pw.textContent=rupiah(wasGrand()); } else { pp.hidden=true; pw.hidden=true; } }
@@ -1938,7 +2047,10 @@ function sync(){
 }
 
 /* ===================== TOAST / FULL ===================== */
-var tT; function toast(t){ var el=$("toast"); el.textContent=t; el.classList.add("show"); clearTimeout(tT); tT=setTimeout(function(){ el.classList.remove("show"); },1500); }
+var tT; function toast(t,actLabel,actFn,dur){ var el=$("toast");
+  el.innerHTML='<span>'+t+'</span>'+(actLabel?'<button type="button" class="t-act">'+actLabel+'</button>':'');
+  if(actLabel){ el.querySelector(".t-act").addEventListener("click",function(ev){ ev.stopPropagation(); el.classList.remove("show"); if(actFn) actFn(); }); }
+  el.classList.add("show"); clearTimeout(tT); tT=setTimeout(function(){ el.classList.remove("show"); },dur||(actLabel?3400:1500)); }
 var fT; function flashFull(){ var el=$("fullBadge"); el.classList.add("show"); clearTimeout(fT); fT=setTimeout(function(){ el.classList.remove("show"); },900); }
 
 /* ===================== WHATSAPP ===================== */
@@ -1956,7 +2068,8 @@ function waMessage(){ var L=[], n=filled(), notes=notesText(), st=ckPick?dateSta
   if(notes){ L.push(""); L.push("Catatan / request khusus:"); L.push(notes); }
   L.push("");
   var d=DISC(); if(savings()>0){ L.push("Promo "+d.label+" ("+discLabel()+")"); }
-  L.push("Estimasi total: "+rupiah(grand()));
+  if(methodFee()>0) L.push("Biaya "+METHODS[ckMethod].label+": +"+rupiah(methodFee()));
+  L.push("Estimasi total: "+rupiah(grand()+methodFee()));
   L.push(""); L.push("Saya paham pesanan pre-order dan ready 1\u20132 hari kerja setelah pembayaran dikonfirmasi.");
   return encodeURIComponent(L.join("\n"));
 }
@@ -1964,7 +2077,7 @@ function waMessage(){ var L=[], n=filled(), notes=notesText(), st=ckPick?dateSta
 /* ===================== INIT ===================== */
 buildFlavors(); buildDubai(); buildBox();
 for(var i=0;i<cap;i++) slots[i]=null;
-ensurePick(); resize(); frameCamera(); sync();
+ensurePick(); resize(); frameCamera(); renderRibbon(); sync();
 setCat("mochi");
 requestAnimationFrame(tick);
 })();
